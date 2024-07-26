@@ -17,13 +17,11 @@ namespace StoryTellingApp.Factory
     {
 
         private IHttpClientFactory _httpClientFactory;
-        private readonly IUserService _userService;
         private readonly ITokenAcquisition _tokenAcquisition;
         private readonly IConfiguration _configuration;
-        public TagClient(IHttpClientFactory httpClientFactory, ITokenAcquisition tokenAcquisition, IUserService userService,IConfiguration configuration)
+        public TagClient(IHttpClientFactory httpClientFactory, ITokenAcquisition tokenAcquisition,IConfiguration configuration)
         {
             _httpClientFactory = httpClientFactory;
-            _userService = userService;
             _tokenAcquisition = tokenAcquisition;
             _configuration = configuration;
         }

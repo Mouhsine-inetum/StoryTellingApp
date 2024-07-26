@@ -39,15 +39,17 @@ builder.Services.AddHttpClient("task",options =>
 
 builder.Services.AddScoped<IGeneralCLient<Tags>, GeneralCLient<Tags>>();
 builder.Services.AddScoped<ITagClient, TagClient>();
+builder.Services.AddScoped<IAdminClient, AdminClient>();
+
 
 //session services
 builder.Services.AddDistributedMemoryCache();
-//builder.Services.AddSession(options =>
-//{
-//    options.IdleTimeout = TimeSpan.FromDays(1);
-//    options.Cookie.HttpOnly = true;
-//    options.Cookie.IsEssential = true;
-//});
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromDays(1);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
 
 
 
@@ -63,6 +65,8 @@ builder.Services.AddRazorPages(options =>
     options.Conventions.AuthorizePage("/Privacy");
     options.Conventions.AuthorizePage("/Accounts/Logout");
     options.Conventions.AuthorizePage("/Tags/Index");
+    options.Conventions.AuthorizePage("/Admin/Index");
+
 
 }).AddMicrosoftIdentityUI();
 
@@ -101,7 +105,7 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
-//app.UseSession();
+app.UseSession();
 
 app.MapRazorPages();
 //app.MapControllers();
